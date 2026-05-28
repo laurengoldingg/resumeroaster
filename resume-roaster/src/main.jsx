@@ -92,11 +92,8 @@ export default function ResumeRoaster() {
   }
 
   function handleUnlock() {
-    // In production: integrate Stripe here
-    setUnlocked(true);
-    setShowPaywall(false);
-    handleRewrite();
-  }
+  window.open('https://buy.stripe.com/test_6oU5kw5Lq9d7fZ85vlb7y00', '_blank');
+}
 
   function reset() {
     setStep("upload");

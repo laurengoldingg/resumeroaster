@@ -1,7 +1,6 @@
-```javascript
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-```
+
 import { useState, useRef } from "react";
 
 const STEPS = ["upload", "roast", "rewrite"];
@@ -688,7 +687,5 @@ Don't worry. We've seen worse. Probably."
     </>
   );
 }
-```javascript
 const root = createRoot(document.getElementById('root'))
 root.render(<ResumeRoaster />)
-```

@@ -44,19 +44,14 @@ export default function ResumeRoaster() {
   const textareaRef = useRef(null);
 
   async function callClaude(systemPrompt, userContent) {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: [{ role: "user", content: userContent }],
-      }),
-    });
-    const data = await response.json();
-    return data.content.map((b) => b.text || "").join("");
-  }
+  const response = await fetch("/api/roast", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ systemPrompt, userContent }),
+  });
+  const data = await response.json();
+  return data.content.map((b) => b.text || "").join("");
+}
 
   async function handleRoast() {
     if (!resumeText.trim()) return;

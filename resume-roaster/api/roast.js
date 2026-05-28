@@ -1,8 +1,12 @@
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
+
+  const key = process.env.ANTHROPIC_API_KEY;
+
+  if (!key) {
+    return res.status(500).json({ error: "No API key found" });
+  }
 
   const { systemPrompt, userContent } = req.body;
 
@@ -11,7 +15,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "x-api-key": key,
         "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
